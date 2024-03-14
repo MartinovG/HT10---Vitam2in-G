@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import ports from "./attributed_ports"
+
 const mapStyles = {
   width: '100%',
   height: '100%'
@@ -12,27 +13,28 @@ export class MapContainer extends Component {
   };
 
   componentDidMount() {
-    // Extract coordinates from the data and create markers
     const markers = ports.features.map(feature => ({
       id: feature.properties.LOCODE,
       position: {
         lat: feature.geometry.coordinates[1],
         lng: feature.geometry.coordinates[0]
       },
-      color: 'red' // Assuming all markers are red initially
+      iconType: 'circle' // Assuming all markers start with a circle icon
     }));
     this.setState({ markers });
   }
 
-  onMapClicked = (t, map, coord) => {
-    const { latLng } = coord;
-    const lat = latLng.lat();
-    const lng = latLng.lng();
-
-    let newMarker = { id: Date.now(), position: { lat, lng } };
-
+  toggleMarkerIcon = (id) => {
     this.setState(prevState => ({
-      markers: [...prevState.markers, newMarker]
+      markers: prevState.markers.map(marker => {
+        if (marker.id === id) {
+          return {
+            ...marker,
+            iconType: marker.iconType === 'circle' ? 'pin' : 'circle'
+          };
+        }
+        return marker;
+      })
     }));
   }
 
@@ -47,19 +49,21 @@ export class MapContainer extends Component {
           lng: 0
         }}
         minZoom={1}
-        onClick={this.onMapClicked}
-        >
+        onClick={() => {}}
+      >
         {this.state.markers.map(marker => (
           <Marker
             key={marker.id}
             position={marker.position}
             icon={{
-              path: window.google.maps.SymbolPath.CIRCLE,
+              path: window.google.maps.SymbolPath[marker.iconType.toUpperCase()],
               scale: 3, // Adjust the scale to change the size of the point
-              fillColor: '#FF0000',
+              fillColor: marker.iconType === 'circle' ? '#FF0000' : '#0000FF', // Circle or Pin color
               fillOpacity: 1,
               strokeWeight: 0
             }}
+            onClick={() => this.toggleMarkerIcon(marker.id)}
+            draggable={true} // Allow markers to be draggable
           />
         ))}
       </Map>
