@@ -1,0 +1,8 @@
+/* Add this CSS to your styles.css or any other CSS file */
+.burger-menu {
+    position: left;
+    top: 20px; /* Adjust the top position as needed */
+    left: 20px; /* Adjust the left position as needed */
+    z-index: 1000; /* Ensure it's above other elements */
+  }
+  
