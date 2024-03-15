@@ -8,6 +8,8 @@ const mapStyles = {
   height: '100%'
 };
 
+
+
 export class MapContainer extends Component {
   state = {
     markers: [],
