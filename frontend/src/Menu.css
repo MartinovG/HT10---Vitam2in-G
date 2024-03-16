@@ -1,0 +1,59 @@
+/* Styling for the menu container */
+.menu-container {
+    position: relative;
+    width: 0;
+    overflow: hidden;
+    transition: width 0.3s;
+  }
+  
+  /* New overlay for background color */
+  .menu-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #9bd4f5;
+    z-index: -1; /* Ensure the overlay is behind the menu content */
+  }
+  
+  /* Styling for the menu content */
+  .menu-content {
+    padding-top: 25%;
+    position: relative;
+    z-index: 1; /* Ensure the content is above the overlay */
+  }
+  
+  /* Styling for the menu items */
+  .menu-item {
+    padding: 20px;
+  }
+  
+  /* Styling for the links */
+  .menu-item a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  /* Styling for the buttons */
+  .menu-item button {
+    padding: 8px 16px;
+    cursor: pointer;
+    border: none;
+    background-color: #ffffff;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s; /* Added transform transition */
+  }
+  
+  /* Hover effect for buttons */
+  .menu-item button:hover {
+    background-color: #47c2ff;
+    transform: scale(1.05); /* Scale effect on hover */
+  }
+  
+  /* Active state for buttons */
+  .menu-item button:active {
+    background-color: #e0e0e0;
+    transform: scale(0.95); /* Scale effect on active */
+  }
+  
