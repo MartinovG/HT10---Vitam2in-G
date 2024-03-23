@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './App.css';
 import MapContainer from './Map';
+import Navbar from "./Navbar";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
   return (
     <div className="App">
       <MapContainer steps={steps} />
+      <Navbar />
     </div>
   );
 }
