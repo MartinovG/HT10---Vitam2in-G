@@ -1,100 +1,62 @@
-// import earthMatrix from './EarthMatrix.js';
-		
-// function heuristic(a, b) {
-// 	return Math.abs(a.lng - b.lng) + Math.abs(a.lat - b.lat);
-//   }
-  
-//   function aStar(start, end) {
-// 	const openSet = [start];
-// 	const cameFrom = new Map();
-// 	const gScore = new Map();
-// 	gScore.set(JSON.stringify(start), 0);
-// 	const fScore = new Map();
-// 	fScore.set(JSON.stringify(start), heuristic(start, end));
-  
-// 	while (openSet.length > 0) {
-// 	  const current = openSet.reduce((a, b) => fScore.get(JSON.stringify(a)) < fScore.get(JSON.stringify(b)) ? a : b);
-  
-// 	  if (current.lng === end.lng && current.lat === end.lat) {
-// 		return true;
-// 	  }
-  
-// 	  openSet.splice(openSet.indexOf(current), 1);
-  
-// 	  const successors = [
-// 		earthMatrix.find(cell => cell.lng === current.lng && cell.lat === current.lat - 1),
-// 		earthMatrix.find(cell => cell.lng === current.lng && cell.lat === current.lat + 1),
-// 		earthMatrix.find(cell => cell.lng === current.lng - 1 && cell.lat === current.lat),
-// 		earthMatrix.find(cell => cell.lng === current.lng + 1 && cell.lat === current.lat)
-// 	  ];
-  
-// 	  for (const neighbor of successors) {
-// 		if (neighbor && neighbor.status === 0) {
-// 		  const tentativeGScore = gScore.get(JSON.stringify(current)) + 1;
-  
-// 		  if (tentativeGScore < (gScore.get(JSON.stringify(neighbor)) || Infinity)) {
-// 			cameFrom.set(JSON.stringify(neighbor), current);
-// 			gScore.set(JSON.stringify(neighbor), tentativeGScore);
-// 			fScore.set(JSON.stringify(neighbor), gScore.get(JSON.stringify(neighbor)) + heuristic(neighbor, end));
-  
-// 			if (!openSet.includes(neighbor)) {
-// 			  openSet.push(neighbor);
-// 			}
-// 		  }
-// 		}
-// 	  }
-// 	}
-  
-// 	return false;
-//   }
+import EarthMatrix from './EarthMatrix.js';
 
-// const start = earthMatrix.find(cell => cell.lng === 24 && cell.lat === 54 - 1);
-// console.log(start)
-// const end = earthMatrix.find(cell => cell.lng === -28 && cell.lat === 32 - 1);
-//   console.log(aStar(start, end)) // => 13
 
-// const earthMatrix = [
-// 	{"lng":64,"lat":22,"status":0},
-// 	{"lng":64,"lat":23,"status":0},
-// 	{"lng":64,"lat":24,"status":0},
-// 	{"lng":64,"lat":25,"status":0},
-// 	{"lng":64,"lat":26,"status":0},
-//   ];
+function findPath(startX, startY, endX, endY) {
+    var pathArray = [];
+    var steps = [];
 
-import earthMatrix from './EarthMatrix.js';
+    for (var i = 0; i < 180; i++) {
+        pathArray[i] = [];
+        for (var j = 0; j < 360; j++) {
+            pathArray[i][j] = {cost: Infinity, previous: null};
+        }
+    }
 
-  function bfs(start, end) {
-	const queue = [[start]];
-	const visited = new Set();
-  
-	while (queue.length > 0) {
-	  const path = queue.shift();
-	  const current = path[path.length - 1];
+    startX = startX + 90; 
+    startY = startY + 180;
 
-	  if (current.lng === end.lng && current.lat === end.lat) {
-		return path;
-	  }
-  
-	  visited.add(JSON.stringify(current));
-  
-	  const successors = [
-		earthMatrix.find(cell => cell.lng === current.lng && cell.lat === current.lat - 1),
-		earthMatrix.find(cell => cell.lng === current.lng && cell.lat === current.lat + 1),
-		earthMatrix.find(cell => cell.lng === current.lng - 1 && cell.lat === current.lat),
-		earthMatrix.find(cell => cell.lng === current.lng + 1 && cell.lat === current.lat)
-	  ];
+    pathArray[startX][startY].cost = 0;
 
-	  for (const successor of successors) {
-		if (successor && !visited.has(JSON.stringify(successor)) && successor.status === 0) {
-		  queue.push([...path, successor]);
-		}
-	  }
-	}
-  
-	return false;
-  }
-  
-  const start = earthMatrix.find(cell => cell.lng === 53 && cell.lat === 24);
-  const end = earthMatrix.find(cell => cell.lng === -28 && cell.lat === 114);
-  
-  console.log(bfs(start, end));
+    var queue = [{x: startX, y: startY}];
+
+    while (queue.length > 0) {
+        queue.sort((a, b) => pathArray[a.x][a.y].cost - pathArray[b.x][b.y].cost);
+        var current = queue.shift();
+
+        var directions = [{x: 0, y: -1}, {x: 0, y: 1}, {x: -1, y: 0}, {x: 1, y: 0}]; 
+
+        for (var dir of directions) {
+            var newX = current.x + dir.x;
+            var newY = current.y + dir.y;
+
+            if (newX < 0 || newX >= 180 || newY < 0 || newY >= 360 || EarthMatrix[newX][newY] == 1) {
+                continue;
+            }
+
+            var newCost = pathArray[current.x][current.y].cost + 1;
+
+            if (newCost < pathArray[newX][newY].cost) {
+                pathArray[newX][newY].cost = newCost;
+                pathArray[newX][newY].previous = current;
+                queue.push({x: newX, y: newY});
+            }
+        }
+    }
+
+    var current = {x: endX + 90, y: endY + 180};
+	if (pathArray[current.x][current.y].previous === null) {
+        console.log("No path");
+        return;
+    }
+    while (current != null) {
+        steps.push(current);
+        current = pathArray[current.x][current.y].previous;
+    }
+
+    steps.reverse();
+
+    return { pathArray, steps };
+}
+
+var result = findPath(64, 63, 4, 4);
+console.log(result.steps); 
