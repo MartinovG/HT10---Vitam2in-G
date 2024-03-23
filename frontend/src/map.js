@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker, Polyline } from 'google-maps-react';
 import ports from "./attributed_ports"
-
-const mapStyles = {
-  width: '100%',
-  height: '100%'
-};
+import './Map.css';
 
 export class MapContainer extends Component {
   state = {
@@ -42,47 +38,47 @@ export class MapContainer extends Component {
   render() {
     console.log(this.props.steps);
     return (
-      <Map
-        google={this.props.google}
-        zoom={2.7} 
-        style={mapStyles}
-        initialCenter={{
-          lat: 0, 
-          lng: 0
-        }}
-        // draggable={false}
-        // zoomControl={false}
-        // scrollwheel={false}
-        // disableDefaultUI={true}
-        >
-
-        {this.state.markers.map(marker => (
-          <Marker
-            key={marker.id}
-            position={marker.position}
-            onClick={() => {
-              this.setState(prevState => ({
-                clickedMarkers: [...prevState.clickedMarkers, marker.position],
-              }));
-              this.toggleMarkerIcon(marker.id);
-            }}
-            icon={{
-              path: window.google.maps.SymbolPath[marker.iconType.toUpperCase()],
-              scale: 3,
-              fillColor: marker.iconType === 'circle' ? '#FF0000' : '#0000FF',
-              fillOpacity: 1,
-              strokeWeight: 0
-            }}
-            draggable={false}/>
-        ))}
-        {Array.isArray(this.props.steps) && this.props.steps.every(step => typeof step.lat === 'number' && typeof step.lng === 'number') && (
-          <Polyline
-            path={this.props.steps}
-            strokeColor="#0000FF"
-            strokeOpacity={0.8}
-            strokeWeight={2} />
-        )}
-      </Map>
+      <div className='Map'>
+        <Map
+          google={this.props.google}
+          zoom={2.7} 
+          initialCenter={{
+            lat: 0, 
+            lng: 0
+          }}
+          draggable={true}
+          zoomControl={false}
+          scrollwheel={false}
+          disableDefaultUI={true}
+          >
+          {this.state.markers.map(marker => (
+            <Marker
+              key={marker.id}
+              position={marker.position}
+              onClick={() => {
+                this.setState(prevState => ({
+                  clickedMarkers: [...prevState.clickedMarkers, marker.position],
+                }));
+                this.toggleMarkerIcon(marker.id);
+              }}
+              icon={{
+                path: window.google.maps.SymbolPath[marker.iconType.toUpperCase()],
+                scale: 3,
+                fillColor: marker.iconType === 'circle' ? '#FF0000' : '#0000FF',
+                fillOpacity: 1,
+                strokeWeight: 0
+              }}
+              draggable={false}/>
+          ))}
+          {Array.isArray(this.props.steps) && this.props.steps.every(step => typeof step.lat === 'number' && typeof step.lng === 'number') && (
+            <Polyline
+              path={this.props.steps}
+              strokeColor="#0000FF"
+              strokeOpacity={0.8}
+              strokeWeight={2} />
+          )}
+        </Map>
+      </div>
     );
   }
 }
