@@ -67,6 +67,3 @@ function findPath(startX, startY, endX, endY) {
 }
 
 export default findPath;
-
-var result = findPath(0, 0, 4, 4);
-console.log(result.steps);
