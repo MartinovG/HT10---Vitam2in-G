@@ -36,7 +36,6 @@ export class MapContainer extends Component {
   }
 
   render() {
-    console.log(this.props.steps);
     return (
       <div className='Map'>
         <Map
@@ -57,8 +56,16 @@ export class MapContainer extends Component {
               position={marker.position}
               onClick={() => {
                 this.setState(prevState => ({
-                  clickedMarkers: [...prevState.clickedMarkers, marker.position],
-                }));
+                  clickedMarkers: [
+                    ...prevState.clickedMarkers,
+                    {
+                      lat: Math.round(marker.position.lat),
+                      lng: Math.round(marker.position.lng),
+                    },
+                  ],
+                }), () => {
+                  this.props.onMarkerClick(this.state.clickedMarkers);
+                });
                 this.toggleMarkerIcon(marker.id);
               }}
               icon={{

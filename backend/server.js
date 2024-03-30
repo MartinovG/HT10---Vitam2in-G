@@ -7,14 +7,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) => {
-    var result = findPath(0, 0, 4, 4);
-    res.json({ steps: result.steps });
-    console.log(result.steps);
+app.post('/clicked-markers', (req, res) => {
+    const clickedMarkers = req.body;
+    console.log('Received clickedMarkers:', clickedMarkers);
+    const start = clickedMarkers[0];
+    const end = clickedMarkers[1];
+    const path = findPath(start.lat, start.lng, end.lat, end.lng);
+    console.log(path.steps);
+    res.json({ steps: path.steps });
 });
 
 app.listen(8000, () => {
-    console.log(`Server is running on port 8000.`);
+  console.log('Server is running on port 8000');
 });
-
-console.log(findPath(0, 0, 4, 4));

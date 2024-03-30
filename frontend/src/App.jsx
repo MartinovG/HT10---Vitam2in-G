@@ -7,23 +7,31 @@ function App() {
 
   const [steps, setSteps] = useState([]);
 
-  useEffect(() => {
-    fetch("http://localhost:8000")
-      .then((res) => res.json())
-      .then((data) => {
-        const formattedSteps = data.steps.flat().map(step => ({
-          lat: step.x, 
-          lng: step.y
-        }));
-        setSteps(formattedSteps);
-      });
-  }, []);
-
-  console.log(steps)
-
+  const handleClickedMarkers = (clickedMarkers) => {
+    fetch('http://localhost:8000/clicked-markers', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(clickedMarkers),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+      const formattedSteps = data.steps.map(step => ({
+        lat: step.x, 
+        lng: step.y
+      }));
+      setSteps(formattedSteps);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  };
+  
   return (
     <div className="App">
-      <MapContainer steps={steps} />
+      <MapContainer steps={steps} onMarkerClick={handleClickedMarkers} />
       <Navbar />
     </div>
   );

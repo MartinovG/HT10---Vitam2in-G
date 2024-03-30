@@ -3,8 +3,8 @@ import './Styles/Navbar.css';
 export default function Navbar() {
   return (
     <nav className="navbar">
-      <div></div>
-      <h1>Navbar</h1>
+        <h1>SailRoute</h1>
+        <img id="logo" src="/Logo.png" alt="Logo" />
     </nav>
   );
 }
