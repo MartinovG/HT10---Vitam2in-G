@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker, Polyline } from 'google-maps-react';
 import ports from "./attributed_ports"
-import './Map.css';
+import './Styles/Map.css';
 
 export class MapContainer extends Component {
   state = {
@@ -84,5 +84,5 @@ export class MapContainer extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'API'
+  apiKey: 'AIzaSyC_jPBoHy7ZwjzJd6UnE9QSnCLhsRU-lTA'
 })(MapContainer);

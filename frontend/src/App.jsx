@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import './App.css';
+import './Styles/App.css';
 import MapContainer from './Map';
 import Navbar from "./Navbar";
 

@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    var result = findPath(0, 0, 22, 132);
+    var result = findPath(0, 0, 4, 4);
     res.json({ steps: result.steps });
     console.log(result.steps);
 });
