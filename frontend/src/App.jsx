@@ -8,7 +8,7 @@ function App() {
   const [steps, setSteps] = useState([]);
 
   const handleClickedMarkers = (clickedMarkers) => {
-    fetch('http://localhost:8000/clicked-markers', {
+    fetch('http://localhost:8000/clicked-markers', { 
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

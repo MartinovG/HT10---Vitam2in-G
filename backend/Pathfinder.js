@@ -4,15 +4,17 @@ function findPath(startX, startY, endX, endY) {
     var pathArray = [];
     var steps = [];
 
-    for (var i = 0; i < 180; i++) {
+    for (var i = 0; i < 360; i++) {
         pathArray[i] = [];
-        for (var j = 0; j < 360; j++) {
+        for (var j = 0; j < 720; j++) {
             pathArray[i][j] = {cost: Infinity, previous: null, heuristic: Infinity};
         }
     }
 
-    startX = startX + 90; 
-    startY = startY + 180;
+    startX = Math.round(startX * 2 + 180);
+    startY = Math.round(startY * 2 + 360);
+    endX = Math.round(endX * 2 + 180);
+    endY = Math.round(endY * 2 + 360);
 
     pathArray[startX][startY].cost = 0;
     pathArray[startX][startY].heuristic = heuristic(startX, startY, endX, endY);
@@ -41,13 +43,17 @@ function findPath(startX, startY, endX, endY) {
         for (var dir of directions) {
             var newX = current.x + dir.x;
             var newY = current.y + dir.y;
-
-            if (newX < 0 || newX >= 180 || newY < 0 || newY >= 360 || EarthMatrix[newX][newY] == 1) {
+        
+            if (newX < 0 || newX >= 360 || newY < 0 || newY >= 720) {
                 continue;
             }
-
+        
+            if (EarthMatrix[newX][newY] == 1) {
+                continue;
+            }
+        
             var newCost = pathArray[current.x][current.y].cost + 1;
-
+        
             if (newCost < pathArray[newX][newY].cost) {
                 pathArray[newX][newY].cost = newCost;
                 pathArray[newX][newY].previous = current;
@@ -57,13 +63,13 @@ function findPath(startX, startY, endX, endY) {
         }
     }
 
-    var current = {x: endX + 90, y: endY + 180};
+    var current = {x: endX, y: endY};
     if (pathArray[current.x][current.y].previous === null) {
         console.log("No path");
         return { pathArray: [], steps: [] };
     }
     while (current != null) {
-        steps.push({x: current.x - 90, y: current.y - 180});
+        steps.push({x: (current.x - 180) / 2, y: (current.y - 360) / 2});
         current = pathArray[current.x][current.y].previous;
     }
 
@@ -77,3 +83,9 @@ function heuristic(x1, y1, x2, y2) {
 }
 
 export default findPath;
+
+console.log(EarthMatrix[10.5*2+180][15.5*2+360]);
+console.log(EarthMatrix[201][391]);
+
+
+
