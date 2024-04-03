@@ -865,14 +865,22 @@
 const ports = {
     "type": "FeatureCollection",
     "features": [
-    { "type": "Feature", "properties": { "Country": "United Arab Emirates", "Function": "1-345---", "LOCODE": "AEAUH", "Name": "Abu Dhabi", "NameWoDiac": "Abu Dhabi", "Status": "AI", "outflows": 41597.142851999997 }, "geometry": { "type": "Point", "coordinates": [ 54.366666666666667, 24.466666666666665 ] } },
     { "type": "Feature", "properties": { "Country": "United States", "Function": "--3-----", "LOCODE": "USCAT", "Name": "Camden", "NameWoDiac": "Camden", "Status": "RQ", "outflows": 176498.0 }, "geometry": { "type": "Point", "coordinates": [ -75.11962, 38.92595 ] } },
     { "type": "Feature", "properties": { "Country": "Mozambique", "Function": "1--4----", "LOCODE": "MZMNC", "Name": "Nacala", "NameWoDiac": "Nacala", "Status": "AI", "outflows": 668056.99998000008 }, "geometry": { "type": "Point", "coordinates": [ 41.68538, -14.1 ] } },
     { "type": "Feature", "properties": { "Country": "South Africa", "Function": "1--4----", "LOCODE": "ZARCB", "Name": "Richards Bay", "NameWoDiac": "Richards Bay", "Status": "AF", "outflows": 164538.86664000002 }, "geometry": { "type": "Point", "coordinates": [ 29.03768, -31.78301 ] } },
     { "type": "Feature", "properties": { "Country": "Cuba", "Function": "---4----", "LOCODE": "CUMOA", "Name": "Moa", "NameWoDiac": "Moa", "Status": "AI", "outflows": 65431.8 }, "geometry": { "type": "Point", "coordinates": [ -74.95075, 19.65776 ] } },
     { "type": "Feature", "properties": { "Country": "Italy", "Function": "1-------", "LOCODE": "ITCTA", "Name": "Catania", "NameWoDiac": "Catania", "Status": "AI", "outflows": 112515.0 }, "geometry": { "type": "Point", "coordinates": [ 15.1, 37.5 ] } },
-
-]
-    }
+    { "type": "Feature", "properties": { "Country": "United States", "Function": "---4----", "LOCODE": "USIJX", "Name": "Jacksonville", "NameWoDiac": "Jacksonville", "Status": "AI", "outflows": 5087986.3044199999 }, "geometry": { "type": "Point", "coordinates": [ -81.65565, 30.33218 ] } },
+    { "type": "Feature", "properties": { "Country": "United States", "Function": "---4----", "LOCODE": "USADQ", "Name": "Kodiak", "NameWoDiac": "Kodiak", "Status": "AI", "outflows": 61671.99999 }, "geometry": { "type": "Point", "coordinates": [ -152.40533, 57.78852 ] } },
+    { "type": "Feature", "properties": { "Country": "United States", "Function": "1--45---", "LOCODE": "USLAX", "Name": "Los Angeles", "NameWoDiac": "Los Angeles", "Status": "AI", "outflows": 12755714.048839999 }, "geometry": { "type": "Point", "coordinates": [ -118.24368, 34.05223 ] } },
+    { "type": "Feature", "properties": { "Country": "United States", "Function": "1--45---", "LOCODE": "USMIA", "Name": "Miami", "NameWoDiac": "Miami", "Status": "AI", "outflows": 6651073.40288 }, "geometry": { "type": "Point", "coordinates": [ -80.19366, 25.77427 ] } },
+    { "type": "Feature", "properties": { "Country": "Russian Federation", "Function": "1-------", "LOCODE": "RUDUD", "Name": "Dudinka", "NameWoDiac": "Dudinka", "Status": "QQ", "outflows": 16796.0 }, "geometry": { "type": "Point", "coordinates": [ 86.17778, 69.40583 ] } },
+    { "type": "Feature", "properties": { "Country": "Russian Federation", "Function": "1--4----", "LOCODE": "RUKGD", "Name": "Kaliningrad", "NameWoDiac": "Kaliningrad", "Status": "AI", "outflows": 133061.5 }, "geometry": { "type": "Point", "coordinates": [ 20.51095, 54.70649 ] } },
+    { "type": "Feature", "properties": { "Country": "Japan", "Function": "1--4----", "LOCODE": "JPMYJ", "Name": "Matsuyama", "NameWoDiac": "Matsuyama", "Status": "AF", "outflows": 213629.0 }, "geometry": { "type": "Point", "coordinates": [ 132.76574, 33.83916 ] } },
+    { "type": "Feature", "properties": { "Country": "Japan", "Function": "1-------", "LOCODE": "JPMII", "Name": "Miike, Fukuoka", "NameWoDiac": "Miike, Fukuoka", "Status": "AF", "outflows": 16640.0 }, "geometry": { "type": "Point", "coordinates": [ 130.47791, 33.05207 ] } },
+    { "type": "Feature", "properties": { "Country": "Japan", "Function": "1-------", "LOCODE": "JPMIZ", "Name": "Mizushima", "NameWoDiac": "Mizushima", "Status": "AF", "outflows": 727415.0 }, "geometry": { "type": "Point", "coordinates": [ 133.73896, 34.5298 ] } },
+    { "type": "Feature", "properties": { "Country": "Japan", "Function": "1-------", "LOCODE": "JPMUR", "Name": "Muroran", "NameWoDiac": "Muroran", "Status": "AF", "outflows": 115517.99996999998 }, "geometry": { "type": "Point", "coordinates": [ 140.98806, 42.31722 ] } },
+    ]
+}
     
-    module.exports = ports;
+module.exports = ports;

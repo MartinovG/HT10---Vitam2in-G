@@ -100,7 +100,7 @@ function findPath(startX, startY, endX, endY) {
 
     console.log("Total distance:", totalDistance);
 
-    return { pathArray, steps };
+    return { pathArray, steps, totalDistance };
 }
 
 function heuristic(x1, y1, x2, y2) {
