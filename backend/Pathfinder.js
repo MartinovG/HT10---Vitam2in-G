@@ -1,4 +1,5 @@
 import EarthMatrix from './EarthMatrix.js';
+import calculateDistance from './Distance.js';
 
 function findPath(startX, startY, endX, endY) {
     var pathArray = [];
@@ -84,12 +85,20 @@ function findPath(startX, startY, endX, endY) {
     }
     while (current != null) {
         steps.push({x: (-current.x + 180) / 2, y: (-current.y + 360) / -2});
-        // console.log({x: (current.x - 180) / 2, y: (current.y - 360) / 2});
-        console.log(EarthMatrix[current.x][current.y])
+        // console.log(EarthMatrix[current.x][current.y])
         current = pathArray[current.x][current.y].previous;
     }
 
     steps.reverse();
+
+    let totalDistance = 0;
+    for (let i = 0; i < steps.length - 1; i++) {
+        let currentStep = steps[i];
+        let nextStep = steps[i + 1];
+        totalDistance += calculateDistance(currentStep.x, currentStep.y, nextStep.x, nextStep.y);
+    }
+
+    console.log("Total distance:", totalDistance);
 
     return { pathArray, steps };
 }
@@ -99,3 +108,4 @@ function heuristic(x1, y1, x2, y2) {
 }
 
 export default findPath;
+

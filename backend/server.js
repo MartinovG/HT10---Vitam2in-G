@@ -13,7 +13,7 @@ app.post('/clicked-markers', (req, res) => {
     const start = clickedMarkers[0];
     const end = clickedMarkers[1];
     const path = findPath(start.lat, start.lng, end.lat, end.lng);
-    console.log(path.steps);
+    // console.log(path.steps);
     res.json({ steps: path.steps });
 });
 

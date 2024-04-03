@@ -51,31 +51,47 @@ export class MapContainer extends Component {
           disableDefaultUI={true}
           >
           {this.state.markers.map(marker => (
-            <Marker
-              key={marker.id}
-              position={marker.position}
-              onClick={() => {
-                this.setState(prevState => ({
-                  clickedMarkers: [
-                    ...prevState.clickedMarkers,
-                    {
-                      lat: Math.round(marker.position.lat),
-                      lng: Math.round(marker.position.lng),
-                    },
-                  ],
-                }), () => {
-                  this.props.onMarkerClick(this.state.clickedMarkers);
-                });
-                this.toggleMarkerIcon(marker.id);
-              }}
-              icon={{
-                path: window.google.maps.SymbolPath[marker.iconType.toUpperCase()],
-                scale: 3,
-                fillColor: marker.iconType === 'circle' ? '#FF0000' : '#0000FF',
-                fillOpacity: 1,
-                strokeWeight: 0
-              }}
-              draggable={false}/>
+          <Marker
+          key={marker.id}
+          position={marker.position}
+          onClick={() => {
+            if (this.state.clickedMarkers.length === 2) {
+              this.setState(prevState => ({
+                clickedMarkers: [],
+                markers: prevState.markers.map(m => {
+                  if (prevState.clickedMarkers.find(cm => cm.lat === m.position.lat && cm.lng === m.position.lng)) {
+                    return { ...m, iconType: 'circle' };
+                  }
+                  return m;
+                })
+              }));
+            }
+            this.setState(prevState => ({
+              clickedMarkers: [
+                ...prevState.clickedMarkers,
+                {
+                  lat: Math.round(marker.position.lat),
+                  lng: Math.round(marker.position.lng),
+                },
+              ],
+              markers: prevState.markers.map(m => {
+                if (m.id === marker.id) {
+                  return { ...m, iconType: 'pin' };
+                }
+                return m;
+              })
+            }), () => {
+              this.props.onMarkerClick(this.state.clickedMarkers);
+            });
+          }}
+          icon={{
+            path: window.google.maps.SymbolPath[marker.iconType.toUpperCase()],
+            scale: 3,
+            fillColor: marker.iconType === 'circle' ? '#FF0000' : '#0000FF',
+            fillOpacity: 1,
+            strokeWeight: 0
+          }}
+          draggable={false}/>
           ))}
           {Array.isArray(this.props.steps) && this.props.steps.every(step => typeof step.lat === 'number' && typeof step.lng === 'number') && (
             <Polyline
