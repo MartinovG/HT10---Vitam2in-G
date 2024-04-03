@@ -11,9 +11,9 @@ function findPath(startX, startY, endX, endY) {
         }
     }
 
-    startX = Math.floor((startX + 90) * 2);
+    startX = Math.floor((-startX + 90) * 2);
     startY = Math.floor((startY + 180) * 2);
-    endX = Math.floor((endX + 90) * 2);
+    endX = Math.floor((-endX + 90) * 2);
     endY = Math.floor((endY + 180) * 2);
 
     console.log("Start coordinates:", startX, startY);
@@ -21,14 +21,14 @@ function findPath(startX, startY, endX, endY) {
     console.log("Start node value in EarthMatrix:", EarthMatrix[startX][startY]);
     console.log("End node value in EarthMatrix:", EarthMatrix[endX][endY]);
 
-    // console.log("node up:", EarthMatrix[startX][startY-1]);
-    // console.log("node down:" ,EarthMatrix[startX][startY+1]);
-    // console.log("node left:", EarthMatrix[startX-1][startY]);
-    // console.log("node right:", EarthMatrix[startX+1][startY]);
-    // console.log("node up-left:", EarthMatrix[startX-1][startY-1]);
-    // console.log("node up-right:", EarthMatrix[startX+1][startY-1]);
-    // console.log("node down-left:", EarthMatrix[startX-1][startY+1]);
-    // console.log("node down-right:", EarthMatrix[startX+1][startY+1]);
+    console.log("node up:", EarthMatrix[startX][startY-1]);
+    console.log("node down:" ,EarthMatrix[startX][startY+1]);
+    console.log("node left:", EarthMatrix[startX-1][startY]);
+    console.log("node right:", EarthMatrix[startX+1][startY]);
+    console.log("node up-left:", EarthMatrix[startX-1][startY-1]);
+    console.log("node up-right:", EarthMatrix[startX+1][startY-1]);
+    console.log("node down-left:", EarthMatrix[startX-1][startY+1]);
+    console.log("node down-right:", EarthMatrix[startX+1][startY+1]);
     
     pathArray[startX][startY].cost = 0;
     pathArray[startX][startY].heuristic = heuristic(startX, startY, endX, endY);
@@ -83,8 +83,9 @@ function findPath(startX, startY, endX, endY) {
         return { pathArray: [], steps: [] };
     }
     while (current != null) {
-        steps.push({x: (current.x - 180) / 2, y: (current.y - 360) / 2});
+        steps.push({x: (-current.x + 180) / 2, y: (-current.y + 360) / -2});
         // console.log({x: (current.x - 180) / 2, y: (current.y - 360) / 2});
+        console.log(EarthMatrix[current.x][current.y])
         current = pathArray[current.x][current.y].previous;
     }
 
@@ -98,7 +99,3 @@ function heuristic(x1, y1, x2, y2) {
 }
 
 export default findPath;
-
-console.log(EarthMatrix[-24*2+90][32*2+180])
-// -24*2+90 = 42
-// 32*2+180 = 244

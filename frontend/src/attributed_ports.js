@@ -866,10 +866,10 @@ const ports = {
     "type": "FeatureCollection",
     "features": [
     { "type": "Feature", "properties": { "Country": "United Arab Emirates", "Function": "1-345---", "LOCODE": "AEAUH", "Name": "Abu Dhabi", "NameWoDiac": "Abu Dhabi", "Status": "AI", "outflows": 41597.142851999997 }, "geometry": { "type": "Point", "coordinates": [ 54.366666666666667, 24.466666666666665 ] } },
-    { "type": "Feature", "properties": { "Country": "United States", "Function": "--3-----", "LOCODE": "USCAT", "Name": "Camden", "NameWoDiac": "Camden", "Status": "RQ", "outflows": 176498.0 }, "geometry": { "type": "Point", "coordinates": [ -75.11962, 39.92595 ] } },
-    { "type": "Feature", "properties": { "Country": "Mozambique", "Function": "1--4----", "LOCODE": "MZMNC", "Name": "Nacala", "NameWoDiac": "Nacala", "Status": "AI", "outflows": 668056.99998000008 }, "geometry": { "type": "Point", "coordinates": [ 40.68538, -14.56257 ] } },
-    { "type": "Feature", "properties": { "Country": "South Africa", "Function": "1--4----", "LOCODE": "ZARCB", "Name": "Richards Bay", "NameWoDiac": "Richards Bay", "Status": "AF", "outflows": 164538.86664000002 }, "geometry": { "type": "Point", "coordinates": [ 32.03768, -28.78301 ] } },
-    { "type": "Feature", "properties": { "Country": "Cuba", "Function": "---4----", "LOCODE": "CUMOA", "Name": "Moa", "NameWoDiac": "Moa", "Status": "AI", "outflows": 65431.8 }, "geometry": { "type": "Point", "coordinates": [ -74.95075, 20.65776 ] } },
+    { "type": "Feature", "properties": { "Country": "United States", "Function": "--3-----", "LOCODE": "USCAT", "Name": "Camden", "NameWoDiac": "Camden", "Status": "RQ", "outflows": 176498.0 }, "geometry": { "type": "Point", "coordinates": [ -75.11962, 38.92595 ] } },
+    { "type": "Feature", "properties": { "Country": "Mozambique", "Function": "1--4----", "LOCODE": "MZMNC", "Name": "Nacala", "NameWoDiac": "Nacala", "Status": "AI", "outflows": 668056.99998000008 }, "geometry": { "type": "Point", "coordinates": [ 41.68538, -14.1 ] } },
+    { "type": "Feature", "properties": { "Country": "South Africa", "Function": "1--4----", "LOCODE": "ZARCB", "Name": "Richards Bay", "NameWoDiac": "Richards Bay", "Status": "AF", "outflows": 164538.86664000002 }, "geometry": { "type": "Point", "coordinates": [ 29.03768, -31.78301 ] } },
+    { "type": "Feature", "properties": { "Country": "Cuba", "Function": "---4----", "LOCODE": "CUMOA", "Name": "Moa", "NameWoDiac": "Moa", "Status": "AI", "outflows": 65431.8 }, "geometry": { "type": "Point", "coordinates": [ -74.95075, 19.65776 ] } },
     { "type": "Feature", "properties": { "Country": "Italy", "Function": "1-------", "LOCODE": "ITCTA", "Name": "Catania", "NameWoDiac": "Catania", "Status": "AI", "outflows": 112515.0 }, "geometry": { "type": "Point", "coordinates": [ 15.1, 37.5 ] } },
 
 ]
