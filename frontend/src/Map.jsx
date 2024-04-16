@@ -40,39 +40,13 @@ export class MapContainer extends Component {
       })
     }));
   }
-
-  handleDragOver = (e) => {
-    e.preventDefault();
-  };
-
   
-  handleMapReady = (mapProps, map) => {
-    this.setState({ map });
-  };
 
-  handleDrop = (e) => {
-    e.preventDefault();
-    const data = e.dataTransfer.getData('text');
-    if (data === 'Draggable' && this.state.map) {
-      const google = this.props.google;
-      const point = new google.maps.Point(e.clientX, e.clientY);
-      const latLng = this.state.map.getProjection().fromContainerPixelToLatLng(point);
-      this.setState(prevState => ({
-        markers: [...prevState.markers, {
-          id: `new-${Date.now()}`,
-          position: {
-            lat: latLng.lat(),
-            lng: latLng.lng()
-          },
-          iconType: 'circle'
-        }]
-      }));
-    }
-  };
 
   render() {
+    const { start, end } = this.props.coordinates;
     return (
-      <div className='Map' onDragOver={this.handleDragOver} onDrop={this.handleDrop}>
+      <div className='Map' >
         <Map
           ref={this.mapRef}
           google={this.props.google}
@@ -137,6 +111,22 @@ export class MapContainer extends Component {
               strokeColor="#0000FF"
               strokeOpacity={0.8}
               strokeWeight={2} />
+          )}
+          {Array.isArray(this.props.currSteps) && this.props.currSteps.every(step => typeof step.lat === 'number' && typeof step.lng === 'number') && (
+          <Polyline
+            path={this.props.currSteps}
+            strokeColor="#FF0000"
+            strokeOpacity={0.8}
+            strokeWeight={2}
+            icons={[
+              {
+                icon: {
+                  path: window.google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                  scale: 3,
+                },
+                offset: '100%',
+              },
+            ]}/>
           )}
         </Map>
       </div>
