@@ -17,5 +17,9 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
     return distance;
   }
 
-export default calculateDistance;
+function timeToDestination(distance, speed) {
+    return distance / speed;
+}
+
+export {calculateDistance, timeToDestination};
 

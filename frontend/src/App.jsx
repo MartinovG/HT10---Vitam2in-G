@@ -8,11 +8,17 @@ function App() {
     const [steps, setSteps] = useState([]);
     const [currSteps, setCurrSteps] = useState([]);
     const [coordinates, setCoordinates] = useState({ start: null, end: null });
+    const [speed, setSpeed] = useState(null);
 
     const handleEnter = (start, end) => {
     setCoordinates({ start, end });
     handleCurrent(start, end);
   };
+
+    const handleSpeedEnter = (speed) => {
+      setSpeed(speed);
+      handleSpeed(speed);
+    };
 
   const handleClickedMarkers = (clickedMarkers) => {
     fetch('http://localhost:8000/clicked-markers', { 
@@ -58,10 +64,27 @@ function App() {
     });
   };
 
+  const handleSpeed = (speed) => {
+    fetch('http://localhost:8000/speed', { 
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ speed }),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  };
+
   return (
     <div className="App">
       <MapContainer steps={steps} currSteps={currSteps} coordinates={coordinates} onMarkerClick={handleClickedMarkers} />
-      <Navbar onEnter={handleEnter} /> 
+      <Navbar onEnter={handleEnter} onSpeed={handleSpeedEnter}/> 
     </div>
   );
 }

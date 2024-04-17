@@ -1,5 +1,5 @@
 import EarthMatrix from './EarthMatrix.js';
-import calculateDistance from './Distance.js';
+import {calculateDistance} from './Distance.js';
 
 function findPath(startX, startY, endX, endY) {
     var pathArray = [];

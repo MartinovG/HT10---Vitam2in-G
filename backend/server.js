@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import findPath from './Pathfinder.js';
+import {timeToDestination} from './Distance.js';
 
 const app = express();
 
@@ -8,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 let totalDistance = 0;
-let clients = [];
+let clients = [];  
 
 app.post('/clicked-markers', (req, res) => {
     const clickedMarkers = req.body;
@@ -37,6 +38,14 @@ app.get('/totalDistance', (req, res) => {
     req.on('close', () => {
         clients = clients.filter(client => client !== res);
     });
+});
+
+app.post('/speed', (req, res) => {
+    const speed = req.body.speed;
+    const time = timeToDestination(totalDistance,speed);
+    console.log('Received speed:', speed);
+    console.log(time);
+    res.json({ status: 'Success', time: time });
 });
 
 app.listen(8000, () => {
