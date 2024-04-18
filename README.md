@@ -53,4 +53,6 @@ node server.js
 2. Adjust the speed of the boat to show the time to arrive from start to end.
 
 3. Add the current start [x],[y] and end [x],[y].
-    
+
+![image](https://github.com/MartinovG/SailRoute/assets/100622131/cade682a-c604-416e-9c6d-c09c9ab640b9)
+
