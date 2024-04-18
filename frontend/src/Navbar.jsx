@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import './Styles/Navbar.css';
 
 export default function Navbar(props) {
-  const [totalDistance, setTotalDistance] = useState(0);
+  const [totalDistance, setTotalDistance] = useState(null);
   const [start, setStart] = useState('');
   const [end, setEnd] = useState('');
   const [speed, setSpeed] = useState('');

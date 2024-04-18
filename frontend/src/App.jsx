@@ -43,7 +43,7 @@ function App() {
   };
 
   const handleCurrent = (start, end) => {
-    fetch('http://localhost:8000/clicked-markers', { 
+    fetch('http://localhost:8000/distance', { 
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

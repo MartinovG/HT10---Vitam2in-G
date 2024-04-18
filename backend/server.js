@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import findPath from './Pathfinder.js';
-import {timeToDestination} from './Distance.js';
+import {findPath, timeToDestination} from './Pathfinder.js';
 
 const app = express();
 
@@ -18,6 +17,19 @@ app.post('/clicked-markers', (req, res) => {
     const end = clickedMarkers[1];
     const path = findPath(start.lat, start.lng, end.lat, end.lng);
     totalDistance = path.totalDistance;
+    res.json({ steps: path.steps });
+
+    clients.forEach(client =>
+        client.write(`data: ${JSON.stringify({ totalDistance })}\n\n`)
+    );
+});
+
+app.post('/distance', (req, res) => {
+    const clickedMarkers = req.body;
+    console.log('Received clickedMarkers:', clickedMarkers);
+    const start = clickedMarkers[0];
+    const end = clickedMarkers[1];
+    const path = findPath(start.lat, start.lng, end.lat, end.lng);
     res.json({ steps: path.steps });
 
     clients.forEach(client =>
