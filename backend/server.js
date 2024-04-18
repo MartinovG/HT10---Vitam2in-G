@@ -24,7 +24,7 @@ app.post('/clicked-markers', (req, res) => {
     );
 });
 
-app.post('/distance', (req, res) => {
+app.post('/current', (req, res) => {
     const clickedMarkers = req.body;
     console.log('Received clickedMarkers:', clickedMarkers);
     const start = clickedMarkers[0];
